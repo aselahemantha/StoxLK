@@ -2,18 +2,18 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt.android)
+    kotlin("kapt")
 }
 
 android {
     namespace = "com.example.stoxlk"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.stoxlk"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -36,6 +36,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    kapt {
+        correctErrorTypes = true
+    }
     buildFeatures {
         compose = true
     }
@@ -57,4 +60,6 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }
