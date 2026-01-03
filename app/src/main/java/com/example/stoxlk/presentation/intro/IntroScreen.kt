@@ -23,8 +23,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,105 +37,114 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun IntroScreen() {
+fun IntroScreen(onLoginClick: () -> Unit) {
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(Color.White),
     ) {
         // Background Gradient/Image Placeholder
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(400.dp)
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(
-                            Color(0xFF1E2838), // Dark Blueish
-                            Color(0xFF7597C3) // Light Blueish
-                        )
-                    )
-                )
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .height(400.dp)
+                    .background(
+                        brush =
+                            Brush.verticalGradient(
+                                colors =
+                                    listOf(
+                                        Color(0xFF1E2838), // Dark Blueish
+                                        Color(0xFF7597C3), // Light Blueish
+                                    ),
+                            ),
+                    ),
         ) {
             // Placeholder for the "Chart" image
-             Icon(
-                 imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                 contentDescription = "Chart",
-                 modifier = Modifier
-                     .size(200.dp)
-                     .align(Alignment.Center)
-                     .padding(bottom = 40.dp),
-                 tint = Color.White.copy(alpha = 0.5f)
-             )
-             
-             // CSE Tracker Tag
-             Surface(
-                 modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .padding(top = 60.dp),
-                 shape = RoundedCornerShape(50),
-                 color = Color.White.copy(alpha = 0.2f)
-             ) {
-                 Row(
-                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                     verticalAlignment = Alignment.CenterVertically
-                 ) {
-                      Icon(
-                         imageVector = Icons.AutoMirrored.Filled.ArrowForward, // Placeholder icon
-                         contentDescription = null,
-                         tint = Color.White,
-                         modifier = Modifier.size(16.dp)
-                     )
-                     Spacer(modifier = Modifier.width(8.dp))
-                     Text(
-                         text = "CSE Tracker",
-                         color = Color.White,
-                         fontWeight = FontWeight.Bold,
-                         style = MaterialTheme.typography.labelMedium
-                     )
-                 }
-             }
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                contentDescription = "Chart",
+                modifier =
+                    Modifier
+                        .size(200.dp)
+                        .align(Alignment.Center)
+                        .padding(bottom = 40.dp),
+                tint = Color.White.copy(alpha = 0.5f),
+            )
+
+            // CSE Tracker Tag
+            Surface(
+                modifier =
+                    Modifier
+                        .align(Alignment.TopCenter)
+                        .padding(top = 60.dp),
+                shape = RoundedCornerShape(50),
+                color = Color.White.copy(alpha = 0.2f),
+            ) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowForward, // Placeholder icon
+                        contentDescription = null,
+                        tint = Color.White,
+                        modifier = Modifier.size(16.dp),
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = "CSE Tracker",
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.labelMedium,
+                    )
+                }
+            }
         }
 
         // Bottom Content
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 370.dp), // Check overlap
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(top = 370.dp),
+            // Check overlap
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-             Surface(
+            Surface(
                 modifier = Modifier.fillMaxSize(),
                 shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
-                color = Color(0xFFF8F9FB) // Light gray background
+                color = Color(0xFFF8F9FB), // Light gray background
             ) {
-                 Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(24.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                Column(
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .padding(24.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
                         text = "Invest Smarter in",
                         fontSize = 28.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color.Black
+                        color = Color.Black,
                     )
                     Text(
                         text = "Sri Lanka",
                         fontSize = 28.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color(0xFF0056D2) // Blue Color
+                        color = Color(0xFF0056D2), // Blue Color
                     )
-                    
+
                     Spacer(modifier = Modifier.height(16.dp))
-                    
+
                     Text(
                         text = "Real-time data from the Colombo Stock Exchange directly to your pocket. Track your portfolio and analyze trends.",
                         textAlign = TextAlign.Center,
                         color = Color.Gray,
                         fontSize = 14.sp,
-                        lineHeight = 20.sp
+                        lineHeight = 20.sp,
                     )
 
                     Spacer(modifier = Modifier.height(32.dp))
@@ -146,7 +155,7 @@ fun IntroScreen() {
                             text = "Email Address",
                             fontWeight = FontWeight.SemiBold,
                             color = Color.Black,
-                            fontSize = 14.sp
+                            fontSize = 14.sp,
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         OutlinedTextField(
@@ -157,8 +166,8 @@ fun IntroScreen() {
                             leadingIcon = {
                                 Icon(Icons.Default.Email, contentDescription = null, tint = Color(0xFF5A6981))
                             },
-                             shape = RoundedCornerShape(12.dp),
-                             singleLine = true
+                            shape = RoundedCornerShape(12.dp),
+                            singleLine = true,
                         )
                     }
 
@@ -166,17 +175,18 @@ fun IntroScreen() {
 
                     // Login Button
                     Button(
-                        onClick = { /* TODO */ },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(56.dp),
+                        onClick = onLoginClick,
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .height(56.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF0056D2)),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(12.dp),
                     ) {
                         Text(
                             text = "Log in with Email",
                             fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null)
@@ -190,7 +200,7 @@ fun IntroScreen() {
                             text = "or",
                             modifier = Modifier.padding(horizontal = 16.dp),
                             color = Color.Gray,
-                             fontSize = 14.sp
+                            fontSize = 14.sp,
                         )
                         Divider(modifier = Modifier.weight(1f), color = Color.LightGray)
                     }
@@ -200,26 +210,27 @@ fun IntroScreen() {
                     // Guest Button
                     OutlinedButton(
                         onClick = { /* TODO */ },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(56.dp),
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .height(56.dp),
                         shape = RoundedCornerShape(12.dp),
-                         colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black)
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black),
                     ) {
                         Text(
                             text = "Continue as Guest",
                             fontSize = 16.sp,
-                            fontWeight = FontWeight.SemiBold
+                            fontWeight = FontWeight.SemiBold,
                         )
                     }
-                    
+
                     Spacer(modifier = Modifier.weight(1f))
-                    
+
                     Text(
                         text = "By continuing, you agree to our Terms of Service & Privacy Policy.",
                         textAlign = TextAlign.Center,
                         color = Color.Gray,
-                        fontSize = 12.sp
+                        fontSize = 12.sp,
                     )
                 }
             }
@@ -230,5 +241,5 @@ fun IntroScreen() {
 @Preview
 @Composable
 fun IntroScreenPreview() {
-    IntroScreen()
+    IntroScreen(onLoginClick = {})
 }
