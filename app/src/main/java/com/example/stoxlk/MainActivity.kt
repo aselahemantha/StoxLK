@@ -39,6 +39,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
@@ -47,7 +48,9 @@ fun AppNavigation() {
         composable("intro") {
             IntroScreen(
                 onLoginClick = {
-                    navController.navigate("login")
+                    navController.navigate("home") {
+                         popUpTo("intro") { inclusive = true }
+                    }
                 },
             )
         }
@@ -57,7 +60,7 @@ fun AppNavigation() {
                     navController.navigate("home") {
                         popUpTo("intro") { inclusive = true }
                     }
-                }
+                },
             )
         }
         composable("home") {

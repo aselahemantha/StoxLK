@@ -1,9 +1,6 @@
 package com.example.stoxlk.presentation.intro
 
-import com.example.stoxlk.ui.theme.*
-
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,7 +17,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -35,12 +32,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.example.stoxlk.ui.theme.StoxBackground
+import com.example.stoxlk.ui.theme.StoxCardBg
+import com.example.stoxlk.ui.theme.StoxChartBlue
+import com.example.stoxlk.ui.theme.StoxPrimaryBlue
+import com.example.stoxlk.ui.theme.StoxSearchBg
+import com.example.stoxlk.ui.theme.StoxTextPrimary
+import com.example.stoxlk.ui.theme.StoxTextSecondary
 import com.example.stoxlk.util.scaleFontSize
 import com.example.stoxlk.util.scaleHeight
 import com.example.stoxlk.util.scaleWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.statusBarsPadding
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun IntroScreen(onLoginClick: () -> Unit) {
     Box(
@@ -60,23 +65,23 @@ fun IntroScreen(onLoginClick: () -> Unit) {
                             Brush.verticalGradient(
                                 colors =
                                     listOf(
-                                        StoxSearchBg, // Dark Blueish
-                                        StoxChartBlue, // Light Blueish
+                                        StoxSearchBg,
+                                        StoxChartBlue,
                                     ),
                             ),
                     ),
         ) {
             // Placeholder for the "Chart" image
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                contentDescription = "Chart",
-                modifier =
-                    Modifier
-                        .size(200f.scaleWidth())
-                        .align(Alignment.Center)
-                        .padding(bottom = 40f.scaleHeight()),
-                tint = StoxCardBg.copy(alpha = 0.5f),
-            )
+//            Icon(
+//                imageVector = Icons.AutoMirrored.Filled.FormatIndentDecrease,
+//                contentDescription = "Chart",
+//                modifier =
+//                    Modifier
+//                        .size(200f.scaleWidth())
+//                        .align(Alignment.Center)
+//                        .padding(bottom = 40f.scaleHeight()),
+//                tint = StoxCardBg.copy(alpha = 0.5f),
+//            )
 
             // CSE Tracker Tag
             Surface(
@@ -88,20 +93,25 @@ fun IntroScreen(onLoginClick: () -> Unit) {
                 color = StoxCardBg.copy(alpha = 0.2f),
             ) {
                 Row(
-                    modifier = Modifier.padding(horizontal = 16f.scaleWidth(), vertical = 8f.scaleHeight()),
+                    modifier =
+                        Modifier.padding(
+                            horizontal = 16f.scaleWidth(),
+                            vertical = 8f.scaleHeight(),
+                        ),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowForward, // Placeholder icon
+                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                         contentDescription = null,
                         tint = StoxCardBg,
                         modifier = Modifier.size(16f.scaleWidth()),
                     )
                     Spacer(modifier = Modifier.width(8f.scaleWidth()))
                     Text(
-                        text = "CSE Tracker",
+                        text = "StoxLK",
                         color = StoxCardBg,
                         fontWeight = FontWeight.Bold,
+                        fontSize = 16f.scaleFontSize(),
                         style = MaterialTheme.typography.labelMedium,
                     )
                 }
@@ -114,19 +124,19 @@ fun IntroScreen(onLoginClick: () -> Unit) {
                 Modifier
                     .fillMaxSize()
                     .padding(top = 370f.scaleHeight()),
-            // Check overlap
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Surface(
                 modifier = Modifier.fillMaxSize(),
                 shape = RoundedCornerShape(topStart = 32f.scaleWidth(), topEnd = 32f.scaleWidth()),
-                color = StoxBackground, // Light gray background
+                color = StoxBackground,
             ) {
                 Column(
                     modifier =
                         Modifier
                             .fillMaxSize()
-                            .padding(24f.scaleWidth()),
+                            .padding(24f.scaleWidth())
+                            .navigationBarsPadding(), // Fix overlap with system nav bar
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
@@ -139,13 +149,15 @@ fun IntroScreen(onLoginClick: () -> Unit) {
                         text = "Sri Lanka",
                         fontSize = 28f.scaleFontSize(),
                         fontWeight = FontWeight.Bold,
-                        color = StoxPrimaryBlue, // Blue Color
+                        color = StoxPrimaryBlue,
                     )
 
                     Spacer(modifier = Modifier.height(16f.scaleHeight()))
 
                     Text(
-                        text = "Real-time data from the Colombo Stock Exchange directly to your pocket. Track your portfolio and analyze trends.",
+                        text =
+                            "Real-time data from the Colombo Stock Exchange directly to your " +
+                                "pocket. Track your portfolio and analyze trends.",
                         textAlign = TextAlign.Center,
                         color = StoxTextSecondary,
                         fontSize = 14f.scaleFontSize(),
@@ -169,7 +181,11 @@ fun IntroScreen(onLoginClick: () -> Unit) {
                             placeholder = { Text("Enter your email", color = StoxTextSecondary) },
                             modifier = Modifier.fillMaxWidth(),
                             leadingIcon = {
-                                Icon(Icons.Default.Email, contentDescription = null, tint = StoxTextSecondary)
+                                Icon(
+                                    Icons.Default.Email,
+                                    contentDescription = null,
+                                    tint = StoxTextSecondary,
+                                )
                             },
                             shape = RoundedCornerShape(12f.scaleWidth()),
                             singleLine = true,
@@ -192,22 +208,26 @@ fun IntroScreen(onLoginClick: () -> Unit) {
                             text = "Log in with Email",
                             fontSize = 16f.scaleFontSize(),
                             fontWeight = FontWeight.Bold,
+                            color = StoxTextPrimary,
                         )
                         Spacer(modifier = Modifier.width(8f.scaleWidth()))
-                        Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null)
+                        Icon(
+                            Icons.AutoMirrored.Filled.ArrowForward,
+                            contentDescription = null,
+                        )
                     }
 
                     Spacer(modifier = Modifier.height(24f.scaleHeight()))
 
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Divider(modifier = Modifier.weight(1f), color = Color.LightGray)
+                        HorizontalDivider(modifier = Modifier.weight(1f), color = Color.LightGray)
                         Text(
                             text = "or",
                             modifier = Modifier.padding(horizontal = 16f.scaleWidth()),
                             color = StoxTextSecondary,
                             fontSize = 14f.scaleFontSize(),
                         )
-                        Divider(modifier = Modifier.weight(1f), color = Color.LightGray)
+                        HorizontalDivider(modifier = Modifier.weight(1f), color = Color.LightGray)
                     }
 
                     Spacer(modifier = Modifier.height(24f.scaleHeight()))
@@ -243,6 +263,7 @@ fun IntroScreen(onLoginClick: () -> Unit) {
     }
 }
 
+@Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
 fun IntroScreenPreview() {
