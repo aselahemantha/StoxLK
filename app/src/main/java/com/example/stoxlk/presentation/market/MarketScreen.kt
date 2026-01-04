@@ -1,5 +1,7 @@
 package com.example.stoxlk.presentation.market
 
+import com.example.stoxlk.ui.theme.*
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -21,6 +23,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.stoxlk.util.scaleFontSize
+import com.example.stoxlk.util.scaleHeight
+import com.example.stoxlk.util.scaleWidth
 import com.example.stoxlk.presentation.home.MarketIndexCard
 
 @Composable
@@ -29,15 +34,15 @@ fun MarketScreen(onStockClick: (String) -> Unit) {
         modifier =
             Modifier
                 .fillMaxSize()
-                .background(Color(0xFFF0F2F5)), // Light Gray Background
+                .background(StoxBackground), // Light Gray Background
     ) {
         // App Bar / Header
         MarketHeader()
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(bottom = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(24.dp),
+            contentPadding = PaddingValues(bottom = 16f.scaleHeight()),
+            verticalArrangement = Arrangement.spacedBy(24f.scaleHeight()),
         ) {
             // Indices
             item {
@@ -45,8 +50,8 @@ fun MarketScreen(onStockClick: (String) -> Unit) {
                     modifier =
                         Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                            .padding(horizontal = 16f.scaleWidth()),
+                    horizontalArrangement = Arrangement.spacedBy(16f.scaleWidth()),
                 ) {
                     MarketIndexCard(
                         modifier = Modifier.weight(1f),
@@ -86,32 +91,32 @@ fun MarketScreen(onStockClick: (String) -> Unit) {
 @Composable
 fun MarketHeader() {
     Surface(
-        color = Color(0xFFF0F2F5), // Match background
+        color = StoxBackground, // Match background
         modifier = Modifier.fillMaxWidth(),
     ) {
         Row(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(16f.scaleWidth()),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Column {
                 Text(
                     text = "Market Overview",
-                    fontSize = 22.sp,
+                    fontSize = 22f.scaleFontSize(),
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black,
+                    color = StoxTextPrimary,
                 )
                 Text(
                     text = "Last updated: 10:45 AM",
-                    fontSize = 12.sp,
-                    color = Color.Gray,
+                    fontSize = 12f.scaleFontSize(),
+                    color = StoxTextSecondary,
                 )
             }
             IconButton(onClick = { /* TODO */ }) {
-                Icon(Icons.Default.Refresh, contentDescription = "Refresh", tint = Color(0xFF0056D2))
+                Icon(Icons.Default.Refresh, contentDescription = "Refresh", tint = StoxPrimaryBlue)
             }
         }
     }
@@ -127,13 +132,13 @@ fun MarketMoversSection(onStockClick: (String) -> Unit) {
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = 16f.scaleWidth()),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text("Market Movers", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+            Text("Market Movers", fontSize = 18f.scaleFontSize(), fontWeight = FontWeight.Bold)
             TextButton(onClick = {}) {
-                Text("View All", color = Color(0xFF0056D2))
+                Text("View All", color = StoxPrimaryBlue)
             }
         }
 
@@ -142,9 +147,9 @@ fun MarketMoversSection(onStockClick: (String) -> Unit) {
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .background(Color(0xFFE2E8F0), RoundedCornerShape(8.dp))
-                    .padding(4.dp),
+                    .padding(horizontal = 16f.scaleWidth())
+                    .background(Color(0xFFE2E8F0), RoundedCornerShape(8f.scaleWidth()))
+                    .padding(4f.scaleWidth()),
         ) {
             tabs.forEachIndexed { index, title ->
                 val isSelected = selectedTab == index
@@ -152,28 +157,28 @@ fun MarketMoversSection(onStockClick: (String) -> Unit) {
                     modifier =
                         Modifier
                             .weight(1f)
-                            .height(32.dp)
-                            .clip(RoundedCornerShape(6.dp))
-                            .background(if (isSelected) Color.White else Color.Transparent),
+                            .height(32f.scaleHeight())
+                            .clip(RoundedCornerShape(6f.scaleWidth()))
+                            .background(if (isSelected) StoxCardBg else Color.Transparent),
                     // .clickable { selectedTab = index } // Add click later if needed
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
                         text = title,
-                        fontSize = 12.sp,
+                        fontSize = 12f.scaleFontSize(),
                         fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
-                        color = if (isSelected) Color.Black else Color.Gray,
+                        color = if (isSelected) StoxTextPrimary else StoxTextSecondary,
                     )
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16f.scaleHeight()))
 
         // Horizontal Movers List
         LazyRow(
-            contentPadding = PaddingValues(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = PaddingValues(horizontal = 16f.scaleWidth()),
+            horizontalArrangement = Arrangement.spacedBy(12f.scaleWidth()),
         ) {
             items(3) {
                 MoverCard(onClick = { onStockClick("JKH.N0000") })
@@ -187,62 +192,62 @@ fun MoverCard(onClick: () -> Unit) {
     Card(
         modifier =
             Modifier
-                .width(140.dp)
-                .height(130.dp),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+                .width(140f.scaleWidth())
+                .height(130f.scaleHeight()),
+        shape = RoundedCornerShape(12f.scaleWidth()),
+        colors = CardDefaults.cardColors(containerColor = StoxCardBg),
         onClick = onClick,
     ) {
         Column(
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .padding(12.dp),
+                    .padding(12f.scaleWidth()),
             verticalArrangement = Arrangement.SpaceBetween,
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(
                     modifier =
                         Modifier
-                            .size(32.dp)
+                            .size(32f.scaleWidth())
                             .clip(CircleShape)
-                            .background(Color(0xFFE3F2FD)),
+                            .background(StoxLightBlue),
                     contentAlignment = Alignment.Center,
                 ) {
-                    Text("J", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Color(0xFF1976D2))
+                    Text("J", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = StoxDarkBlue)
                 }
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(8f.scaleWidth()))
                 Column {
-                    Text("JKH.N", fontWeight = FontWeight.Bold, fontSize = 14.sp)
-                    Text("John Keells", fontSize = 10.sp, color = Color.Gray)
+                    Text("JKH.N", fontWeight = FontWeight.Bold, fontSize = 14f.scaleFontSize())
+                    Text("John Keells", fontSize = 10f.scaleFontSize(), color = StoxTextSecondary)
                 }
             }
 
             Column {
-                Text("150.00", fontWeight = FontWeight.Bold, fontSize = 20.sp)
-                Text("+2.5%", color = Color(0xFF4CAF50), fontSize = 14.sp, fontWeight = FontWeight.Bold)
+                Text("150.00", fontWeight = FontWeight.Bold, fontSize = 20f.scaleFontSize())
+                Text("+2.5%", color = StoxGreen, fontSize = 14f.scaleFontSize(), fontWeight = FontWeight.Bold)
             }
         }
     }
 }
 
 @Composable
-fun SectorOverviewSection() {
-    Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-        Text("Sector Overview", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.height(16.dp))
+    fun SectorOverviewSection() {
+        Column(modifier = Modifier.padding(horizontal = 16f.scaleWidth())) {
+        Text("Sector Overview", fontSize = 18f.scaleFontSize(), fontWeight = FontWeight.Bold)
+        Spacer(modifier = Modifier.height(16f.scaleHeight()))
 
         Card(
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(12f.scaleWidth()),
             colors = CardDefaults.cardColors(containerColor = Color.White),
         ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                SectorItem("Banking & Finance", "+1.4%", Color(0xFF4CAF50), 0.7f)
-                Spacer(modifier = Modifier.height(16.dp))
-                SectorItem("Manufacturing", "-0.8%", Color(0xFFF44336), 0.4f)
-                Spacer(modifier = Modifier.height(16.dp))
-                SectorItem("Telecommunication", "+0.5%", Color(0xFF4CAF50), 0.5f)
+            Column(modifier = Modifier.padding(16f.scaleWidth())) {
+                SectorItem("Banking & Finance", "+1.4%", StoxGreen, 0.7f)
+                Spacer(modifier = Modifier.height(16f.scaleHeight()))
+                SectorItem("Manufacturing", "-0.8%", StoxRed, 0.4f)
+                Spacer(modifier = Modifier.height(16f.scaleHeight()))
+                SectorItem("Telecommunication", "+0.5%", StoxGreen, 0.5f)
             }
         }
     }
@@ -260,25 +265,25 @@ fun SectorItem(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            Text(name, fontSize = 14.sp, color = Color(0xFF424242))
-            Text(change, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = color)
+            Text(name, fontSize = 14f.scaleFontSize(), color = Color(0xFF424242))
+            Text(change, fontSize = 14f.scaleFontSize(), fontWeight = FontWeight.Bold, color = color)
         }
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(8f.scaleHeight()))
         // Custom Progress Bar
         Box(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .height(6.dp)
-                    .clip(RoundedCornerShape(3.dp))
-                    .background(Color(0xFFF5F5F5)),
+                    .height(6f.scaleHeight())
+                    .clip(RoundedCornerShape(3f.scaleWidth()))
+                    .background(StoxDivider),
         ) {
             Box(
                 modifier =
                     Modifier
                         .fillMaxWidth(progress)
-                        .height(6.dp)
-                        .clip(RoundedCornerShape(3.dp))
+                        .height(6f.scaleHeight())
+                        .clip(RoundedCornerShape(3f.scaleWidth()))
                         .background(color),
             )
         }
@@ -286,60 +291,60 @@ fun SectorItem(
 }
 
 @Composable
-fun SharePricesSection(onStockClick: (String) -> Unit) {
-    Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-        Text("Today's Share Prices", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.height(12.dp))
+    fun SharePricesSection(onStockClick: (String) -> Unit) {
+    Column(modifier = Modifier.padding(horizontal = 16f.scaleWidth())) {
+        Text("Today's Share Prices", fontSize = 18f.scaleFontSize(), fontWeight = FontWeight.Bold)
+        Spacer(modifier = Modifier.height(12f.scaleHeight()))
 
         // Filter Chip
         Surface(
-            shape = RoundedCornerShape(20.dp),
+            shape = RoundedCornerShape(20f.scaleWidth()),
             border = androidx.compose.foundation.BorderStroke(1.dp, Color.LightGray),
-            color = Color.White,
+            color = StoxCardBg,
         ) {
             Row(
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                modifier = Modifier.padding(horizontal = 12f.scaleWidth(), vertical = 8f.scaleHeight()),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Icon(Icons.Default.FilterList, contentDescription = null, modifier = Modifier.size(16.dp))
-                Spacer(modifier = Modifier.width(8.dp))
-                Text("All Sectors", fontSize = 14.sp)
-                Spacer(modifier = Modifier.width(4.dp))
-                Icon(Icons.Default.ArrowDropDown, contentDescription = null, modifier = Modifier.size(20.dp))
+                Icon(Icons.Default.FilterList, contentDescription = null, modifier = Modifier.size(16f.scaleWidth()))
+                Spacer(modifier = Modifier.width(8f.scaleWidth()))
+                Text("All Sectors", fontSize = 14f.scaleFontSize())
+                Spacer(modifier = Modifier.width(4f.scaleWidth()))
+                Icon(Icons.Default.ArrowDropDown, contentDescription = null, modifier = Modifier.size(20f.scaleWidth()))
             }
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16f.scaleHeight()))
 
         // Header Row
         Row(modifier = Modifier.fillMaxWidth()) {
-            Text("COMPANY", fontSize = 12.sp, color = Color.Gray, fontWeight = FontWeight.Bold, modifier = Modifier.weight(2f))
-            Text("PRICE", fontSize = 12.sp, color = Color.Gray, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+            Text("COMPANY", fontSize = 12f.scaleFontSize(), color = StoxTextSecondary, fontWeight = FontWeight.Bold, modifier = Modifier.weight(2f))
+            Text("PRICE", fontSize = 12f.scaleFontSize(), color = StoxTextSecondary, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
             Text(
                 "VOL",
-                fontSize = 12.sp,
-                color = Color.Gray,
+                fontSize = 12f.scaleFontSize(),
+                color = StoxTextSecondary,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.weight(0.5f),
                 textAlign = androidx.compose.ui.text.style.TextAlign.End,
             )
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(8f.scaleHeight()))
 
         // List
         Card(
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
+            shape = RoundedCornerShape(12f.scaleWidth()),
+            colors = CardDefaults.cardColors(containerColor = StoxCardBg),
         ) {
             Column {
                 SharePriceItem("HNB.N0000", "Hatton National Bank", "180.50", "+1.2%", "1.2M", onClick = { onStockClick("HNB.N0000") })
-                Divider(color = Color(0xFFF5F5F5))
+                Divider(color = StoxDivider)
                 SharePriceItem("LLUB.N0000", "Chevron Lubricants", "85.00", "-0.5%", "540K", onClick = { onStockClick("LLUB.N0000") })
-                Divider(color = Color(0xFFF5F5F5))
+                Divider(color = StoxDivider)
                 SharePriceItem("HAYL.N0000", "Hayleys PLC", "92.30", "0.0%", "890K", onClick = { onStockClick("HAYL.N0000") })
-                Divider(color = Color(0xFFF5F5F5))
+                Divider(color = StoxDivider)
                 SharePriceItem("COMB.N0000", "Commercial Bank", "64.50", "+0.4%", "2.1M", onClick = { onStockClick("COMB.N0000") })
             }
         }
@@ -360,26 +365,26 @@ fun SharePriceItem(
             Modifier
                 .fillMaxWidth()
                 .clickable(onClick = onClick)
-                .padding(16.dp),
+                .padding(16f.scaleWidth()),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(modifier = Modifier.weight(2f)) {
-            Text(code, fontWeight = FontWeight.Bold, fontSize = 14.sp)
-            Text(name, fontSize = 12.sp, color = Color.Gray)
+            Text(code, fontWeight = FontWeight.Bold, fontSize = 14f.scaleFontSize())
+            Text(name, fontSize = 12f.scaleFontSize(), color = StoxTextSecondary)
         }
 
         Column(modifier = Modifier.weight(1f)) {
-            Text(price, fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            Text(price, fontWeight = FontWeight.Bold, fontSize = 14f.scaleFontSize())
             Text(
                 change,
-                fontSize = 12.sp,
+                fontSize = 12f.scaleFontSize(),
                 color =
                     if (change.contains("+")) {
-                        Color(0xFF4CAF50)
+                        StoxGreen
                     } else if (change.contains("-")) {
-                        Color(0xFFF44336)
+                        StoxRed
                     } else {
-                        Color.Gray
+                        StoxTextSecondary
                     },
                 fontWeight = FontWeight.Bold,
             )
@@ -387,8 +392,8 @@ fun SharePriceItem(
 
         Text(
             vol,
-            fontSize = 14.sp,
-            color = Color.Black,
+            fontSize = 14f.scaleFontSize(),
+            color = StoxTextPrimary,
             modifier = Modifier.weight(0.5f),
             textAlign = androidx.compose.ui.text.style.TextAlign.End,
         )

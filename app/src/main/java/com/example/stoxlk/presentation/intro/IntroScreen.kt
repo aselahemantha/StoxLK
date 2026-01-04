@@ -1,5 +1,7 @@
 package com.example.stoxlk.presentation.intro
 
+import com.example.stoxlk.ui.theme.*
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -35,6 +37,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.stoxlk.util.scaleFontSize
+import com.example.stoxlk.util.scaleHeight
+import com.example.stoxlk.util.scaleWidth
 
 @Composable
 fun IntroScreen(onLoginClick: () -> Unit) {
@@ -42,21 +47,21 @@ fun IntroScreen(onLoginClick: () -> Unit) {
         modifier =
             Modifier
                 .fillMaxSize()
-                .background(Color.White),
+                .background(StoxCardBg),
     ) {
         // Background Gradient/Image Placeholder
         Box(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .height(400.dp)
+                    .height(400f.scaleHeight())
                     .background(
                         brush =
                             Brush.verticalGradient(
                                 colors =
                                     listOf(
-                                        Color(0xFF1E2838), // Dark Blueish
-                                        Color(0xFF7597C3), // Light Blueish
+                                        StoxSearchBg, // Dark Blueish
+                                        StoxChartBlue, // Light Blueish
                                     ),
                             ),
                     ),
@@ -67,10 +72,10 @@ fun IntroScreen(onLoginClick: () -> Unit) {
                 contentDescription = "Chart",
                 modifier =
                     Modifier
-                        .size(200.dp)
+                        .size(200f.scaleWidth())
                         .align(Alignment.Center)
-                        .padding(bottom = 40.dp),
-                tint = Color.White.copy(alpha = 0.5f),
+                        .padding(bottom = 40f.scaleHeight()),
+                tint = StoxCardBg.copy(alpha = 0.5f),
             )
 
             // CSE Tracker Tag
@@ -78,24 +83,24 @@ fun IntroScreen(onLoginClick: () -> Unit) {
                 modifier =
                     Modifier
                         .align(Alignment.TopCenter)
-                        .padding(top = 60.dp),
+                        .padding(top = 60f.scaleHeight()),
                 shape = RoundedCornerShape(50),
-                color = Color.White.copy(alpha = 0.2f),
+                color = StoxCardBg.copy(alpha = 0.2f),
             ) {
                 Row(
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                    modifier = Modifier.padding(horizontal = 16f.scaleWidth(), vertical = 8f.scaleHeight()),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowForward, // Placeholder icon
                         contentDescription = null,
-                        tint = Color.White,
-                        modifier = Modifier.size(16.dp),
+                        tint = StoxCardBg,
+                        modifier = Modifier.size(16f.scaleWidth()),
                     )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(8f.scaleWidth()))
                     Text(
                         text = "CSE Tracker",
-                        color = Color.White,
+                        color = StoxCardBg,
                         fontWeight = FontWeight.Bold,
                         style = MaterialTheme.typography.labelMedium,
                     )
@@ -108,70 +113,70 @@ fun IntroScreen(onLoginClick: () -> Unit) {
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .padding(top = 370.dp),
+                    .padding(top = 370f.scaleHeight()),
             // Check overlap
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
-                color = Color(0xFFF8F9FB), // Light gray background
+                shape = RoundedCornerShape(topStart = 32f.scaleWidth(), topEnd = 32f.scaleWidth()),
+                color = StoxBackground, // Light gray background
             ) {
                 Column(
                     modifier =
                         Modifier
                             .fillMaxSize()
-                            .padding(24.dp),
+                            .padding(24f.scaleWidth()),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
                         text = "Invest Smarter in",
-                        fontSize = 28.sp,
+                        fontSize = 28f.scaleFontSize(),
                         fontWeight = FontWeight.Bold,
-                        color = Color.Black,
+                        color = StoxTextPrimary,
                     )
                     Text(
                         text = "Sri Lanka",
-                        fontSize = 28.sp,
+                        fontSize = 28f.scaleFontSize(),
                         fontWeight = FontWeight.Bold,
-                        color = Color(0xFF0056D2), // Blue Color
+                        color = StoxPrimaryBlue, // Blue Color
                     )
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16f.scaleHeight()))
 
                     Text(
                         text = "Real-time data from the Colombo Stock Exchange directly to your pocket. Track your portfolio and analyze trends.",
                         textAlign = TextAlign.Center,
-                        color = Color.Gray,
-                        fontSize = 14.sp,
-                        lineHeight = 20.sp,
+                        color = StoxTextSecondary,
+                        fontSize = 14f.scaleFontSize(),
+                        lineHeight = 20f.scaleFontSize(),
                     )
 
-                    Spacer(modifier = Modifier.height(32.dp))
+                    Spacer(modifier = Modifier.height(32f.scaleHeight()))
 
                     // Email Input
                     Column(modifier = Modifier.fillMaxWidth()) {
                         Text(
                             text = "Email Address",
                             fontWeight = FontWeight.SemiBold,
-                            color = Color.Black,
-                            fontSize = 14.sp,
+                            color = StoxTextPrimary,
+                            fontSize = 14f.scaleFontSize(),
                         )
-                        Spacer(modifier = Modifier.height(8.dp))
+                        Spacer(modifier = Modifier.height(8f.scaleHeight()))
                         OutlinedTextField(
                             value = "",
                             onValueChange = {},
-                            placeholder = { Text("Enter your email", color = Color.Gray) },
+                            placeholder = { Text("Enter your email", color = StoxTextSecondary) },
                             modifier = Modifier.fillMaxWidth(),
                             leadingIcon = {
-                                Icon(Icons.Default.Email, contentDescription = null, tint = Color(0xFF5A6981))
+                                Icon(Icons.Default.Email, contentDescription = null, tint = StoxTextSecondary)
                             },
-                            shape = RoundedCornerShape(12.dp),
+                            shape = RoundedCornerShape(12f.scaleWidth()),
                             singleLine = true,
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(24f.scaleHeight()))
 
                     // Login Button
                     Button(
@@ -179,33 +184,33 @@ fun IntroScreen(onLoginClick: () -> Unit) {
                         modifier =
                             Modifier
                                 .fillMaxWidth()
-                                .height(56.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF0056D2)),
-                        shape = RoundedCornerShape(12.dp),
+                                .height(56f.scaleHeight()),
+                        colors = ButtonDefaults.buttonColors(containerColor = StoxPrimaryBlue),
+                        shape = RoundedCornerShape(12f.scaleWidth()),
                     ) {
                         Text(
                             text = "Log in with Email",
-                            fontSize = 16.sp,
+                            fontSize = 16f.scaleFontSize(),
                             fontWeight = FontWeight.Bold,
                         )
-                        Spacer(modifier = Modifier.width(8.dp))
+                        Spacer(modifier = Modifier.width(8f.scaleWidth()))
                         Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null)
                     }
 
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(24f.scaleHeight()))
 
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Divider(modifier = Modifier.weight(1f), color = Color.LightGray)
                         Text(
                             text = "or",
-                            modifier = Modifier.padding(horizontal = 16.dp),
-                            color = Color.Gray,
-                            fontSize = 14.sp,
+                            modifier = Modifier.padding(horizontal = 16f.scaleWidth()),
+                            color = StoxTextSecondary,
+                            fontSize = 14f.scaleFontSize(),
                         )
                         Divider(modifier = Modifier.weight(1f), color = Color.LightGray)
                     }
 
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(24f.scaleHeight()))
 
                     // Guest Button
                     OutlinedButton(
@@ -213,13 +218,13 @@ fun IntroScreen(onLoginClick: () -> Unit) {
                         modifier =
                             Modifier
                                 .fillMaxWidth()
-                                .height(56.dp),
-                        shape = RoundedCornerShape(12.dp),
-                        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black),
+                                .height(56f.scaleHeight()),
+                        shape = RoundedCornerShape(12f.scaleWidth()),
+                        colors = ButtonDefaults.outlinedButtonColors(contentColor = StoxTextPrimary),
                     ) {
                         Text(
                             text = "Continue as Guest",
-                            fontSize = 16.sp,
+                            fontSize = 16f.scaleFontSize(),
                             fontWeight = FontWeight.SemiBold,
                         )
                     }
@@ -229,8 +234,8 @@ fun IntroScreen(onLoginClick: () -> Unit) {
                     Text(
                         text = "By continuing, you agree to our Terms of Service & Privacy Policy.",
                         textAlign = TextAlign.Center,
-                        color = Color.Gray,
-                        fontSize = 12.sp,
+                        color = StoxTextSecondary,
+                        fontSize = 12f.scaleFontSize(),
                     )
                 }
             }

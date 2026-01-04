@@ -1,5 +1,7 @@
 package com.example.stoxlk.presentation.search
 
+import com.example.stoxlk.ui.theme.*
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,56 +21,59 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.stoxlk.util.scaleFontSize
+import com.example.stoxlk.util.scaleHeight
+import com.example.stoxlk.util.scaleWidth
 
 @Composable
 fun SearchScreen(onStockClick: (String) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF0F2F5)) // Light Gray Background
-            .padding(16.dp)
+            .background(StoxBackground) // Light Gray Background
+            .padding(16f.scaleWidth())
     ) {
         Text(
             text = "Search",
-            fontSize = 24.sp,
+            fontSize = 24f.scaleFontSize(),
             fontWeight = FontWeight.Bold,
-            color = Color.Black
+            color = StoxTextPrimary
         )
         
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16f.scaleHeight()))
         
         // Search Bar
         Surface(
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            color = Color.White,
-            shadowElevation = 2.dp
+            shape = RoundedCornerShape(12f.scaleWidth()),
+            color = StoxCardBg,
+            shadowElevation = 2f.scaleWidth()
         ) {
             Row(
-                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+                 modifier = Modifier.padding(horizontal = 16f.scaleWidth(), vertical = 12f.scaleHeight()),
                  verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(Icons.Default.Search, contentDescription = null, tint = Color.Gray)
-                Spacer(modifier = Modifier.width(12.dp))
+                Icon(Icons.Default.Search, contentDescription = null, tint = StoxTextSecondary)
+                Spacer(modifier = Modifier.width(12f.scaleWidth()))
                 // Hardcoded "JK" for visual fidelity to design
-                Text("JK", color = Color.Black, fontSize = 16.sp, modifier = Modifier.weight(1f))
-                Icon(Icons.Default.Cancel, contentDescription = "Clear", tint = Color.Gray) // Using Cancel as Close icon derivative
+                Text("JK", color = StoxTextPrimary, fontSize = 16f.scaleFontSize(), modifier = Modifier.weight(1f))
+                Icon(Icons.Default.Cancel, contentDescription = "Clear", tint = StoxTextSecondary) // Using Cancel as Close icon derivative
             }
         }
         
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(24f.scaleHeight()))
         
         // Top Results
         Text(
             text = "Top Results",
-            fontSize = 18.sp,
+            fontSize = 18f.scaleFontSize(),
             fontWeight = FontWeight.Bold,
-            color = Color.Black
+            color = StoxTextPrimary
         )
         
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16f.scaleHeight()))
         
-        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(12f.scaleHeight())) {
             SearchResultItem(
                 code = "JKH.N0000",
                 name = "John Keells Holdings", 
@@ -95,24 +100,24 @@ fun SearchScreen(onStockClick: (String) -> Unit) {
             )
         }
         
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(24f.scaleHeight()))
         
         // People also search for
         Text(
             text = "People also search for", 
-            fontSize = 18.sp, 
+            fontSize = 18f.scaleFontSize(), 
             fontWeight = FontWeight.Bold, 
-            color = Color.Black
+            color = StoxTextPrimary
         )
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(12f.scaleHeight()))
         
         // Using a FlowRow-like layout (simple row + column for now as simple FlowRow is experimental/bulky)
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(8f.scaleHeight())) {
+            Row(horizontalArrangement = Arrangement.spacedBy(8f.scaleWidth())) {
                 SuggestionChip(text = "DIAL.N0000")
                 SuggestionChip(text = "SAMP.N0000")
             }
-             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+             Row(horizontalArrangement = Arrangement.spacedBy(8f.scaleWidth())) {
                 SuggestionChip(text = "COMB.N0000")
                 SuggestionChip(text = "HNB.N0000")
             }
@@ -131,49 +136,49 @@ fun SearchResultItem(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        shape = RoundedCornerShape(12f.scaleWidth()),
+        colors = CardDefaults.cardColors(containerColor = StoxCardBg),
         onClick = onClick
     ) {
         Row(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(16f.scaleWidth()),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
                 modifier = Modifier
-                    .size(48.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(Color(0xFF264653)) // Dark Greenish Blue from design
+                    .size(48f.scaleWidth())
+                    .clip(RoundedCornerShape(8f.scaleWidth()))
+                    .background(StoxSearchBg) // Dark Greenish Blue from design
             )
             
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(16f.scaleWidth()))
             
             Column(modifier = Modifier.weight(1f)) {
-                Text(code, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                Text(name, fontSize = 14.sp, color = Color.Gray, maxLines = 1)
+                Text(code, fontWeight = FontWeight.Bold, fontSize = 16f.scaleFontSize())
+                Text(name, fontSize = 14f.scaleFontSize(), color = StoxTextSecondary, maxLines = 1)
             }
             
             Column(horizontalAlignment = Alignment.End) {
                  Text(
                      change, 
-                     color = if (change.contains("+")) Color(0xFF4CAF50) else if (change.contains("-")) Color(0xFFF44336) else Color.Gray,
+                     color = if (change.contains("+")) StoxGreen else if (change.contains("-")) StoxRed else StoxTextSecondary,
                      fontWeight = FontWeight.Bold,
-                     fontSize = 14.sp
+                     fontSize = 14f.scaleFontSize()
                  )
-                Text("LKR $price", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                Text("LKR $price", fontWeight = FontWeight.Bold, fontSize = 14f.scaleFontSize())
             }
             
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(16f.scaleWidth()))
             
             // Add Button
              Box(
                 modifier = Modifier
-                    .size(36.dp)
+                    .size(36f.scaleWidth())
                     .clip(CircleShape)
-                    .background(Color(0xFFE3F2FD)),
+                    .background(StoxLightBlue),
                 contentAlignment = Alignment.Center
             ) {
-                 Icon(Icons.Default.Add, contentDescription = "Add", tint = Color(0xFF0056D2))
+                 Icon(Icons.Default.Add, contentDescription = "Add", tint = StoxPrimaryBlue)
              }
         }
     }
@@ -182,15 +187,15 @@ fun SearchResultItem(
 @Composable
 fun SuggestionChip(text: String) {
     Surface(
-        shape = RoundedCornerShape(8.dp),
-        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE0E0E0)),
+        shape = RoundedCornerShape(8f.scaleWidth()),
+        border = androidx.compose.foundation.BorderStroke(1f.scaleWidth(), Color(0xFFE0E0E0)),
         color = Color.White
     ) {
         Text(
             text = text,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-            fontSize = 14.sp,
-            color = Color(0xFF424242)
+            modifier = Modifier.padding(horizontal = 16f.scaleWidth(), vertical = 8f.scaleHeight()),
+            fontSize = 14f.scaleFontSize(),
+            color = StoxTextSecondary
         )
     }
 }

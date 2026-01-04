@@ -1,5 +1,7 @@
 package com.example.stoxlk.presentation.home
 
+import com.example.stoxlk.ui.theme.*
+
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
@@ -28,6 +30,9 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.stoxlk.util.scaleFontSize
+import com.example.stoxlk.util.scaleHeight
+import com.example.stoxlk.util.scaleWidth
 import androidx.lint.kotlin.metadata.Visibility
 import com.example.stoxlk.presentation.market.MarketScreen
 import com.example.stoxlk.presentation.portfolio.PortfolioScreen
@@ -46,6 +51,7 @@ fun HomeScreen(onStockClick: (String) -> Unit) {
     }
 
     Scaffold(
+        containerColor = StoxBackground,
         bottomBar = {
             NavigationBar(containerColor = Color.White) {
                 NavigationBarItem(
@@ -53,30 +59,55 @@ fun HomeScreen(onStockClick: (String) -> Unit) {
                     label = { Text("Home") },
                     selected = selectedTab == 0,
                     onClick = { selectedTab = 0 },
+                    colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = StoxPrimaryBlue,
+                        selectedTextColor = StoxPrimaryBlue,
+                        indicatorColor = StoxLightBlue
+                    )
                 )
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.PieChart, contentDescription = "Portfolio") },
                     label = { Text("Portfolio") },
                     selected = selectedTab == 1,
                     onClick = { selectedTab = 1 },
+                    colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = StoxPrimaryBlue,
+                        selectedTextColor = StoxPrimaryBlue,
+                        indicatorColor = StoxLightBlue
+                    )
                 )
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.BarChart, contentDescription = "Market") },
                     label = { Text("Market") },
                     selected = selectedTab == 2,
                     onClick = { selectedTab = 2 },
+                     colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = StoxPrimaryBlue,
+                        selectedTextColor = StoxPrimaryBlue,
+                        indicatorColor = StoxLightBlue
+                    )
                 )
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Search, contentDescription = "Search") },
                     label = { Text("Search") },
                     selected = selectedTab == 3,
                     onClick = { selectedTab = 3 },
+                     colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = StoxPrimaryBlue,
+                        selectedTextColor = StoxPrimaryBlue,
+                        indicatorColor = StoxLightBlue
+                    )
                 )
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Settings, contentDescription = "Settings") },
                     label = { Text("Settings") },
                     selected = selectedTab == 4,
                     onClick = { selectedTab = 4 },
+                     colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = StoxPrimaryBlue,
+                        selectedTextColor = StoxPrimaryBlue,
+                        indicatorColor = StoxLightBlue
+                    )
                 )
             }
         },
@@ -86,7 +117,6 @@ fun HomeScreen(onStockClick: (String) -> Unit) {
                 Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
-                    .background(Color(0xFFF0F2F5)), // Light Gray Background
         ) {
             if (isLoading && selectedTab == 0) {
                 HomeShimmer()
@@ -108,8 +138,8 @@ fun HomeScreen(onStockClick: (String) -> Unit) {
 fun HomeContent(onStockClick: (String) -> Unit) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(bottom = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(bottom = 16f.scaleHeight()),
+        verticalArrangement = Arrangement.spacedBy(16f.scaleHeight()),
     ) {
         // Header
         item {
@@ -123,17 +153,19 @@ fun HomeContent(onStockClick: (String) -> Unit) {
                     Box(
                         modifier =
                             Modifier
-                                .size(48.dp)
+                                .size(48f.scaleWidth())
+                                .clip(CircleShape)
+                                .size(48f.scaleWidth())
                                 .clip(CircleShape)
                                 .background(Color.LightGray), // Placeholder
                     ) {
                         // Image would go here
                         Icon(Icons.Default.Person, contentDescription = null, modifier = Modifier.align(Alignment.Center))
                     }
-                    Spacer(modifier = Modifier.width(12.dp))
+                    Spacer(modifier = Modifier.width(12f.scaleWidth()))
                     Column {
-                        Text("Good Morning,", fontSize = 12.sp, color = Color.Gray)
-                        Text("Navin Perera", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                        Text("Good Morning,", fontSize = 12f.scaleFontSize(), color = StoxTextSecondary)
+                        Text("Navin Perera", fontSize = 16f.scaleFontSize(), fontWeight = FontWeight.Bold)
                     }
                 }
                 IconButton(onClick = { /* TODO */ }) {
@@ -150,21 +182,21 @@ fun HomeContent(onStockClick: (String) -> Unit) {
                 modifier = Modifier.wrapContentSize(),
             ) {
                 Row(
-                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                    modifier = Modifier.padding(horizontal = 12f.scaleWidth(), vertical = 6f.scaleHeight()),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Box(
                         modifier =
                             Modifier
-                                .size(8.dp)
+                                .size(8f.scaleWidth())
                                 .clip(CircleShape)
-                                .background(Color(0xFF4CAF50)),
+                                .background(StoxGreen),
                     )
-                    Spacer(modifier = Modifier.width(8.dp))
+                    Spacer(modifier = Modifier.width(8f.scaleWidth()))
                     Text(
                         "MARKET OPEN • CLOSES 14:30",
-                        color = Color(0xFF2E7D32),
-                        fontSize = 12.sp,
+                        color = StoxDarkGreen,
+                        fontSize = 12f.scaleFontSize(),
                         fontWeight = FontWeight.Bold,
                     )
                 }
@@ -177,15 +209,15 @@ fun HomeContent(onStockClick: (String) -> Unit) {
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .height(180.dp),
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFF0056D2)),
+                        .height(180f.scaleHeight()),
+                shape = RoundedCornerShape(16f.scaleWidth()),
+                colors = CardDefaults.cardColors(containerColor = StoxPrimaryBlue),
             ) {
                 Column(
                     modifier =
                         Modifier
                             .fillMaxSize()
-                            .padding(20.dp),
+                            .padding(20f.scaleWidth()),
                     verticalArrangement = Arrangement.SpaceBetween,
                 ) {
                     Column {
@@ -193,14 +225,14 @@ fun HomeContent(onStockClick: (String) -> Unit) {
                             Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween,
                         ) {
-                            Text("Total Equity", color = Color.White.copy(alpha = 0.8f), fontSize = 14.sp)
+                            Text("Total Equity", color = Color.White.copy(alpha = 0.8f), fontSize = 14f.scaleFontSize())
                             Icon(Icons.Default.Visibility, contentDescription = null, tint = Color.White.copy(alpha = 0.8f))
                         }
-                        Spacer(modifier = Modifier.height(8.dp))
+                        Spacer(modifier = Modifier.height(8f.scaleHeight()))
                         Text(
                             "LKR 1,250,400.00",
                             color = Color.White,
-                            fontSize = 28.sp,
+                            fontSize = 28f.scaleFontSize(),
                             fontWeight = FontWeight.Bold,
                         )
                     }
@@ -212,20 +244,20 @@ fun HomeContent(onStockClick: (String) -> Unit) {
                     ) {
                         Surface(
                             color = Color.White.copy(alpha = 0.2f),
-                            shape = RoundedCornerShape(8.dp),
+                            shape = RoundedCornerShape(8f.scaleWidth()),
                         ) {
-                            Row(modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)) {
+                            Row(modifier = Modifier.padding(horizontal = 8f.scaleWidth(), vertical = 4f.scaleHeight())) {
                                 Icon(
                                     Icons.Default.TrendingUp,
                                     contentDescription = null,
                                     tint = Color.White,
-                                    modifier = Modifier.size(16.dp),
+                                    modifier = Modifier.size(16f.scaleWidth()),
                                 )
-                                Spacer(modifier = Modifier.width(4.dp))
-                                Text("+LKR 12,500 (1.2%)", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 12.sp)
+                                Spacer(modifier = Modifier.width(4f.scaleWidth()))
+                                Text("+LKR 12,500 (1.2%)", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 12f.scaleFontSize())
                             }
                         }
-                        Text("Today's Gain", color = Color.White.copy(alpha = 0.8f), fontSize = 12.sp)
+                        Text("Today's Gain", color = Color.White.copy(alpha = 0.8f), fontSize = 12f.scaleFontSize())
                     }
                 }
             }
@@ -235,17 +267,17 @@ fun HomeContent(onStockClick: (String) -> Unit) {
         item {
             Surface(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(8.dp),
-                color = Color.White,
-                shadowElevation = 2.dp,
+                shape = RoundedCornerShape(8f.scaleWidth()),
+                color = StoxCardBg,
+                shadowElevation = 2f.scaleWidth(),
             ) {
                 Row(
-                    modifier = Modifier.padding(12.dp),
+                    modifier = Modifier.padding(12f.scaleWidth()),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Icon(Icons.Default.Search, contentDescription = null, tint = Color.Gray)
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Text("Search stocks (e.g. JKH.N0000)", color = Color.Gray)
+                    Icon(Icons.Default.Search, contentDescription = null, tint = StoxTextSecondary)
+                    Spacer(modifier = Modifier.width(12f.scaleWidth()))
+                    Text("Search stocks (e.g. JKH.N0000)", color = StoxTextSecondary)
                 }
             }
         }
@@ -257,16 +289,16 @@ fun HomeContent(onStockClick: (String) -> Unit) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text("Market Indices", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text("Market Indices", fontSize = 18f.scaleFontSize(), fontWeight = FontWeight.Bold)
                 TextButton(onClick = {}) {
-                    Text("View All", color = Color(0xFF0056D2))
+                    Text("View All", color = StoxPrimaryBlue)
                 }
             }
         }
 
         // Market Indices Cards
         item {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16f.scaleWidth())) {
                 MarketIndexCard(
                     modifier = Modifier.weight(1f),
                     title = "ASPI",
@@ -286,7 +318,7 @@ fun HomeContent(onStockClick: (String) -> Unit) {
 
         // Market Movers Header
         item {
-            Text("Market Movers", fontSize = 18.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 8.dp))
+            Text("Market Movers", fontSize = 18f.scaleFontSize(), fontWeight = FontWeight.Bold, modifier = Modifier.padding(top = 8f.scaleHeight()))
         }
 
         // Market Movers List
@@ -300,7 +332,7 @@ fun HomeContent(onStockClick: (String) -> Unit) {
 fun HomeShimmer() {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
+        contentPadding = PaddingValues(16f.scaleWidth()),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         // Header Shimmer
@@ -311,29 +343,29 @@ fun HomeShimmer() {
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Box(modifier = Modifier.size(48.dp).clip(CircleShape).shimmerEffect())
-                    Spacer(modifier = Modifier.width(12.dp))
+                    Box(modifier = Modifier.size(48f.scaleWidth()).clip(CircleShape).shimmerEffect())
+                    Spacer(modifier = Modifier.width(12f.scaleWidth()))
                     Column {
                         Box(
                             modifier =
                                 Modifier
-                                    .width(100.dp)
-                                    .height(12.dp)
-                                    .clip(RoundedCornerShape(4.dp))
+                                    .width(100f.scaleWidth())
+                                    .height(12f.scaleHeight())
+                                    .clip(RoundedCornerShape(4f.scaleWidth()))
                                     .shimmerEffect(),
                         )
-                        Spacer(modifier = Modifier.height(4.dp))
+                        Spacer(modifier = Modifier.height(4f.scaleHeight()))
                         Box(
                             modifier =
                                 Modifier
-                                    .width(150.dp)
-                                    .height(16.dp)
-                                    .clip(RoundedCornerShape(4.dp))
+                                    .width(150f.scaleWidth())
+                                    .height(16f.scaleHeight())
+                                    .clip(RoundedCornerShape(4f.scaleWidth()))
                                     .shimmerEffect(),
                         )
                     }
                 }
-                Box(modifier = Modifier.size(24.dp).clip(CircleShape).shimmerEffect())
+                Box(modifier = Modifier.size(24f.scaleWidth()).clip(CircleShape).shimmerEffect())
             }
         }
 
@@ -342,8 +374,8 @@ fun HomeShimmer() {
             Box(
                 modifier =
                     Modifier
-                        .width(200.dp)
-                        .height(24.dp)
+                        .width(200f.scaleWidth())
+                        .height(24f.scaleHeight())
                         .clip(RoundedCornerShape(50))
                         .shimmerEffect(),
             )
@@ -355,8 +387,8 @@ fun HomeShimmer() {
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .height(180.dp)
-                        .clip(RoundedCornerShape(16.dp))
+                        .height(180f.scaleHeight())
+                        .clip(RoundedCornerShape(16f.scaleWidth()))
                         .shimmerEffect(),
             )
         }
@@ -367,8 +399,8 @@ fun HomeShimmer() {
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .height(48.dp)
-                        .clip(RoundedCornerShape(8.dp))
+                        .height(48f.scaleHeight())
+                        .clip(RoundedCornerShape(8f.scaleWidth()))
                         .shimmerEffect(),
             )
         }
@@ -382,17 +414,17 @@ fun HomeShimmer() {
                 Box(
                     modifier =
                         Modifier
-                            .width(120.dp)
-                            .height(20.dp)
-                            .clip(RoundedCornerShape(4.dp))
+                            .width(120f.scaleWidth())
+                            .height(20f.scaleHeight())
+                            .clip(RoundedCornerShape(4f.scaleWidth()))
                             .shimmerEffect(),
                 )
                 Box(
                     modifier =
                         Modifier
-                            .width(60.dp)
-                            .height(20.dp)
-                            .clip(RoundedCornerShape(4.dp))
+                            .width(60f.scaleWidth())
+                            .height(20f.scaleHeight())
+                            .clip(RoundedCornerShape(4f.scaleWidth()))
                             .shimmerEffect(),
                 )
             }
@@ -400,21 +432,21 @@ fun HomeShimmer() {
 
         // Indices Cards Shimmer
         item {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16f.scaleWidth())) {
                 Box(
                     modifier =
                         Modifier
                             .weight(1f)
-                            .height(100.dp)
-                            .clip(RoundedCornerShape(12.dp))
+                            .height(100f.scaleHeight())
+                            .clip(RoundedCornerShape(12f.scaleWidth()))
                             .shimmerEffect(),
                 )
                 Box(
                     modifier =
                         Modifier
                             .weight(1f)
-                            .height(100.dp)
-                            .clip(RoundedCornerShape(12.dp))
+                            .height(100f.scaleHeight())
+                            .clip(RoundedCornerShape(12f.scaleWidth()))
                             .shimmerEffect(),
                 )
             }
@@ -425,9 +457,9 @@ fun HomeShimmer() {
             Box(
                 modifier =
                     Modifier
-                        .width(120.dp)
-                        .height(20.dp)
-                        .clip(RoundedCornerShape(4.dp))
+                        .width(120f.scaleWidth())
+                        .height(20f.scaleHeight())
+                        .clip(RoundedCornerShape(4f.scaleWidth()))
                         .shimmerEffect(),
             )
         }
@@ -437,8 +469,8 @@ fun HomeShimmer() {
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .height(72.dp)
-                        .clip(RoundedCornerShape(12.dp))
+                        .height(72f.scaleHeight())
+                        .clip(RoundedCornerShape(12f.scaleWidth()))
                         .shimmerEffect(),
             )
         }
@@ -487,17 +519,17 @@ fun MarketIndexCard(
 ) {
     Card(
         modifier = modifier,
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        shape = RoundedCornerShape(12f.scaleWidth()),
+        colors = CardDefaults.cardColors(containerColor = StoxCardBg),
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text(title, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Color.Gray)
-            Spacer(modifier = Modifier.height(8.dp))
+        Column(modifier = Modifier.padding(16f.scaleWidth())) {
+            Text(title, fontSize = 12f.scaleFontSize(), fontWeight = FontWeight.Bold, color = StoxTextSecondary)
+            Spacer(modifier = Modifier.height(8f.scaleHeight()))
             // Placeholder for graph
-            Icon(Icons.Default.ShowChart, contentDescription = null, tint = if (isPositive) Color(0xFF4CAF50) else Color(0xFFF44336))
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(value, fontSize = 20.sp, fontWeight = FontWeight.Bold)
-            Text(change, fontSize = 12.sp, color = if (isPositive) Color(0xFF4CAF50) else Color(0xFFF44336))
+            Icon(Icons.Default.ShowChart, contentDescription = null, tint = if (isPositive) StoxGreen else StoxRed)
+            Spacer(modifier = Modifier.height(8f.scaleHeight()))
+            Text(value, fontSize = 20f.scaleFontSize(), fontWeight = FontWeight.Bold)
+            Text(change, fontSize = 12f.scaleFontSize(), color = if (isPositive) StoxGreen else StoxRed)
         }
     }
 }
@@ -509,39 +541,39 @@ fun MarketMoverItem(onClick: () -> Unit) {
             Modifier
                 .fillMaxWidth()
                 .clickable(onClick = onClick),
-        shape = RoundedCornerShape(12.dp),
-        color = Color.White,
+        shape = RoundedCornerShape(12f.scaleWidth()),
+        color = StoxCardBg,
     ) {
         Row(
-            modifier = Modifier.padding(12.dp),
+            modifier = Modifier.padding(12f.scaleWidth()),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(
                 modifier =
                     Modifier
-                        .size(40.dp)
-                        .clip(RoundedCornerShape(8.dp))
-                        .background(Color(0xFFE3F2FD)),
+                        .size(40f.scaleWidth())
+                        .clip(RoundedCornerShape(8f.scaleWidth()))
+                        .background(StoxLightBlue),
                 contentAlignment = Alignment.Center,
             ) {
-                Text("JKH", fontSize = 10.sp, fontWeight = FontWeight.Bold, color = Color(0xFF1976D2))
+                Text("JKH", fontSize = 10f.scaleFontSize(), fontWeight = FontWeight.Bold, color = StoxDarkBlue)
             }
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(12f.scaleWidth()))
             Column(modifier = Modifier.weight(1f)) {
-                Text("John Keells Holdings", fontWeight = FontWeight.Bold, fontSize = 14.sp)
-                Text("JKH.N0000", fontSize = 12.sp, color = Color.Gray)
+                Text("John Keells Holdings", fontWeight = FontWeight.Bold, fontSize = 14f.scaleFontSize())
+                Text("JKH.N0000", fontSize = 12f.scaleFontSize(), color = StoxTextSecondary)
             }
             Column(horizontalAlignment = Alignment.End) {
-                Text("192.50", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                Text("192.50", fontWeight = FontWeight.Bold, fontSize = 14f.scaleFontSize())
                 Surface(
-                    color = Color(0xFFE8F5E9),
-                    shape = RoundedCornerShape(4.dp),
+                    color = StoxLightGreen,
+                    shape = RoundedCornerShape(4f.scaleWidth()),
                 ) {
                     Text(
                         "+1.25%",
-                        color = Color(0xFF2E7D32),
-                        fontSize = 10.sp,
-                        modifier = Modifier.padding(horizontal = 4.dp, vertical = 2.dp),
+                        color = StoxDarkGreen,
+                        fontSize = 10f.scaleFontSize(),
+                        modifier = Modifier.padding(horizontal = 4f.scaleWidth(), vertical = 2f.scaleHeight()),
                     )
                 }
             }

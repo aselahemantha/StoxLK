@@ -21,28 +21,32 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.stoxlk.util.scaleFontSize
+import com.example.stoxlk.util.scaleHeight
+import com.example.stoxlk.util.scaleWidth
 import com.example.stoxlk.R
+import com.example.stoxlk.ui.theme.*
 
 @Composable
 fun SettingsScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF0F2F5)) // Light Gray Background
-            .padding(16.dp)
+            .background(StoxBackground) // Light Gray Background
+            .padding(16f.scaleWidth())
     ) {
         Text(
             text = "Settings",
-            fontSize = 24.sp,
+            fontSize = 24f.scaleFontSize(),
             fontWeight = FontWeight.Bold,
-            color = Color.Black
+            color = StoxTextPrimary
         )
         
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16f.scaleHeight()))
         
         LazyColumn(
-            contentPadding = PaddingValues(bottom = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(24.dp)
+            contentPadding = PaddingValues(bottom = 16f.scaleHeight()),
+            verticalArrangement = Arrangement.spacedBy(24f.scaleHeight())
         ) {
             // Profile Card
             item {
@@ -53,7 +57,7 @@ fun SettingsScreen() {
             item {
                 SettingsSection(title = "ACCOUNT") {
                     SettingsItem(icon = Icons.Default.Person, title = "Edit Profile")
-                    Divider(color = Color(0xFFF5F5F5))
+                    Divider(color = StoxDivider)
                     SettingsItem(icon = Icons.Default.Lock, title = "Change Password")
                 }
             }
@@ -66,9 +70,9 @@ fun SettingsScreen() {
                         title = "Currency",
                         trailingContent = {
                             Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text("LKR (Default)", fontSize = 12.sp, color = Color.Gray)
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Icon(Icons.Default.Lock, contentDescription = "Locked", tint = Color.LightGray, modifier = Modifier.size(16.dp))
+                                Text("LKR (Default)", fontSize = 12f.scaleFontSize(), color = StoxTextSecondary)
+                                Spacer(modifier = Modifier.width(8f.scaleWidth()))
+                                Icon(Icons.Default.Lock, contentDescription = "Locked", tint = Color.LightGray, modifier = Modifier.size(16f.scaleWidth()))
                             }
                         }
                     )
@@ -91,9 +95,9 @@ fun SettingsScreen() {
                 }
                  Text(
                     "Daily summary and breaking news alerts for CSE.",
-                    fontSize = 12.sp,
-                    color = Color.Gray,
-                    modifier = Modifier.padding(start = 16.dp, top = 8.dp)
+                    fontSize = 12f.scaleFontSize(),
+                    color = StoxTextSecondary,
+                    modifier = Modifier.padding(start = 16f.scaleWidth(), top = 8f.scaleHeight())
                 )
             }
             
@@ -101,9 +105,9 @@ fun SettingsScreen() {
             item {
                 SettingsSection(title = "SUPPORT & INFO") {
                     SettingsItem(icon = Icons.Default.Info, title = "About StoxLK")
-                    Divider(color = Color(0xFFF5F5F5))
+                    Divider(color = StoxDivider)
                     SettingsItem(icon = Icons.Default.Warning, title = "Disclaimer") // Using Warning as close approx to Triangle Alert
-                    Divider(color = Color(0xFFF5F5F5))
+                    Divider(color = StoxDivider)
                     SettingsItem(icon = Icons.Default.PrivacyTip, title = "Privacy Policy")
                 }
             }
@@ -117,19 +121,19 @@ fun SettingsScreen() {
                     TextButton(onClick = { /* TODO */ }) {
                         Text(
                             "Log Out",
-                            color = Color(0xFFF44336),
+                            color = StoxRed,
                             fontWeight = FontWeight.Bold,
-                            fontSize = 16.sp
+                            fontSize = 16f.scaleFontSize()
                         )
                     }
                     
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(16f.scaleHeight()))
                     
-                    Text("Version 1.0.0 (Build 2023)", fontSize = 12.sp, color = Color.Gray)
+                    Text("Version 1.0.0 (Build 2023)", fontSize = 12f.scaleFontSize(), color = StoxTextSecondary)
                      Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text("Made with ", fontSize = 12.sp, color = Color.Gray)
-                        Icon(Icons.Default.Favorite, contentDescription = "Love", tint = Color(0xFFF44336), modifier = Modifier.size(12.dp))
-                        Text(" in Sri Lanka", fontSize = 12.sp, color = Color.Gray)
+                        Text("Made with ", fontSize = 12f.scaleFontSize(), color = StoxTextSecondary)
+                        Icon(Icons.Default.Favorite, contentDescription = "Love", tint = StoxRed, modifier = Modifier.size(12f.scaleWidth()))
+                        Text(" in Sri Lanka", fontSize = 12f.scaleFontSize(), color = StoxTextSecondary)
                     }
                 }
             }
@@ -141,32 +145,32 @@ fun SettingsScreen() {
 fun ProfileCard() {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White)
+        shape = RoundedCornerShape(12f.scaleWidth()),
+        colors = CardDefaults.cardColors(containerColor = StoxCardBg)
     ) {
         Row(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(16f.scaleWidth()),
             verticalAlignment = Alignment.CenterVertically
         ) {
              Box(
                 modifier = Modifier
-                    .size(64.dp)
+                    .size(64f.scaleWidth())
                     .clip(CircleShape)
                     .background(Color(0xFFFFCC80)) // Placeholder skin tone/color
             ) {
-                 Icon(Icons.Default.Person, contentDescription = null, modifier = Modifier.align(Alignment.Center).size(32.dp), tint = Color(0xFF5D4037))
+                 Icon(Icons.Default.Person, contentDescription = null, modifier = Modifier.align(Alignment.Center).size(32f.scaleWidth()), tint = Color(0xFF5D4037))
                  // In real app use Image(painter = painterResource(id = R.drawable.avatar), ...)
             }
             
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(16f.scaleWidth()))
             
             Column(modifier = Modifier.weight(1f)) {
-                Text("John Doe", fontWeight = FontWeight.Bold, fontSize = 18.sp)
-                Text("johndoe@example.com", fontSize = 14.sp, color = Color.Gray)
+                Text("John Doe", fontWeight = FontWeight.Bold, fontSize = 18f.scaleFontSize())
+                Text("johndoe@example.com", fontSize = 14f.scaleFontSize(), color = StoxTextSecondary)
             }
             
             TextButton(onClick = { /* TODO */ }) {
-                Text("Edit", color = Color(0xFF0056D2), fontWeight = FontWeight.Bold)
+                Text("Edit", color = StoxPrimaryBlue, fontWeight = FontWeight.Bold)
             }
         }
     }
@@ -175,13 +179,13 @@ fun ProfileCard() {
 @Composable
 fun SettingsSection(title: String, content: @Composable ColumnScope.() -> Unit) {
     Column {
-        Text(title, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Color.Gray, modifier = Modifier.padding(bottom = 8.dp, start = 4.dp))
+        Text(title, fontSize = 12f.scaleFontSize(), fontWeight = FontWeight.Bold, color = StoxTextSecondary, modifier = Modifier.padding(bottom = 8f.scaleHeight(), start = 4f.scaleWidth()))
         Card(
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(12.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White)
+            shape = RoundedCornerShape(12f.scaleWidth()),
+            colors = CardDefaults.cardColors(containerColor = StoxCardBg)
         ) {
-            Column(modifier = Modifier.padding(vertical = 4.dp)) {
+            Column(modifier = Modifier.padding(vertical = 4f.scaleHeight())) {
                 content()
             }
         }
@@ -197,17 +201,17 @@ fun SettingsItem(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 12.dp),
+            .padding(horizontal = 16f.scaleWidth(), vertical = 12f.scaleHeight()),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(icon, contentDescription = null, tint = Color.Gray)
-        Spacer(modifier = Modifier.width(16.dp))
-        Text(title, fontSize = 16.sp, modifier = Modifier.weight(1f))
+        Icon(icon, contentDescription = null, tint = StoxTextSecondary)
+        Spacer(modifier = Modifier.width(16f.scaleWidth()))
+        Text(title, fontSize = 16f.scaleFontSize(), modifier = Modifier.weight(1f))
         
         if (trailingContent != null) {
             trailingContent()
         } else {
-             Icon(Icons.AutoMirrored.Filled.ArrowForwardIos, contentDescription = null, tint = Color.LightGray, modifier = Modifier.size(16.dp))
+             Icon(Icons.AutoMirrored.Filled.ArrowForwardIos, contentDescription = null, tint = Color.LightGray, modifier = Modifier.size(16f.scaleWidth()))
         }
     }
 }
