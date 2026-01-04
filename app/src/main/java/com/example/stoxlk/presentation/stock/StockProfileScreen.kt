@@ -25,6 +25,9 @@ import com.example.stoxlk.util.scaleFontSize
 import com.example.stoxlk.util.scaleHeight
 import com.example.stoxlk.util.scaleWidth
 import androidx.compose.ui.draw.alpha
+import com.example.stoxlk.presentation.stock.components.StockProfileTopBar
+import com.example.stoxlk.presentation.stock.components.StatsCard
+import com.example.stoxlk.presentation.stock.components.AnnouncementCard
 
 @Composable
 fun StockProfileScreen(
@@ -226,88 +229,4 @@ fun StockProfileScreen(
     }
 }
 
-@Composable
-fun StockProfileTopBar(symbol: String, onBackClick: () -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 8f.scaleWidth(), vertical = 8f.scaleHeight()), // Adjust padding for visual alignment
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        IconButton(onClick = onBackClick) {
-            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-        }
-        
-        Spacer(modifier = Modifier.weight(1f))
-        
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(symbol, fontWeight = FontWeight.Bold, fontSize = 16f.scaleFontSize())
-            Text("JOHN KEELLS HOLDINGS", fontSize = 10f.scaleFontSize(), color = StoxTextSecondary)
-        }
-        
-        Spacer(modifier = Modifier.weight(1f))
-        
-        IconButton(onClick = { /* TODO */ }) {
-            Icon(Icons.Default.StarBorder, contentDescription = "Favorite", tint = StoxTextSecondary) // StarOutline doesn't strictly exist in default set sometimes, StarBorder is close
-        }
-        IconButton(onClick = { /* TODO */ }) {
-            Icon(Icons.Default.Refresh, contentDescription = "Refresh", tint = StoxChartBlue)
-        }
-    }
-}
-
-@Composable
-fun StatsCard(label: String, value: String, modifier: Modifier = Modifier, isHigh: Boolean? = null) {
-    Surface(
-        modifier = modifier,
-        shape = RoundedCornerShape(8f.scaleWidth()),
-        color = StoxBackground // Very light gray background
-    ) {
-        Column(modifier = Modifier.padding(16f.scaleWidth())) {
-            Text(label, fontSize = 12f.scaleFontSize(), color = StoxTextSecondary)
-            Spacer(modifier = Modifier.height(4f.scaleHeight()))
-            Text(
-                value, 
-                fontSize = 16f.scaleFontSize(), 
-                fontWeight = FontWeight.Bold,
-                color = if (isHigh != null) (if (isHigh) StoxGreen else StoxRed) else StoxTextPrimary
-            )
-        }
-    }
-}
-
-@Composable
-fun AnnouncementCard(title: String, date: String, icon: androidx.compose.ui.graphics.vector.ImageVector = Icons.Default.Campaign) {
-    Surface(
-        shape = RoundedCornerShape(12f.scaleWidth()),
-        border = androidx.compose.foundation.BorderStroke(1f.scaleWidth(), StoxDivider),
-        color = StoxCardBg,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Row(modifier = Modifier.padding(16f.scaleWidth())) {
-             Box(
-                modifier = Modifier
-                    .size(40f.scaleWidth())
-                    .clip(RoundedCornerShape(8f.scaleWidth()))
-                    .background(StoxLightBlue), // Light Blue
-                contentAlignment = Alignment.Center
-            ) {
-                 Icon(icon, contentDescription = null, tint = StoxDarkBlue, modifier = Modifier.size(20.dp))
-            }
-            Spacer(modifier = Modifier.width(16f.scaleWidth()))
-            Column {
-                Text(title, fontWeight = FontWeight.Bold, fontSize = 14f.scaleFontSize())
-                Text(
-                    "The Board of Directors has declared an interim dividend of LKR 1.50 per share.",
-                    fontSize = 12f.scaleFontSize(),
-                    color = StoxTextSecondary,
-                    maxLines = 2,
-                    lineHeight = 16f.scaleFontSize(),
-                    modifier = Modifier.padding(vertical = 4f.scaleHeight())
-                )
-                Text(date, fontSize = 10f.scaleFontSize(), color = StoxTextSecondary)
-            }
-        }
-    }
-}
 

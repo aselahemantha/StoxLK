@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.sp
 import com.example.stoxlk.util.scaleFontSize
 import com.example.stoxlk.util.scaleHeight
 import com.example.stoxlk.util.scaleWidth
+import com.example.stoxlk.presentation.search.components.SearchResultItem
+import com.example.stoxlk.presentation.search.components.SuggestionChip
 
 @Composable
 fun SearchScreen(onStockClick: (String) -> Unit) {
@@ -125,77 +127,4 @@ fun SearchScreen(onStockClick: (String) -> Unit) {
     }
 }
 
-@Composable
-fun SearchResultItem(
-    code: String, 
-    name: String, 
-    price: String, 
-    change: String, 
-    isPositive: Boolean,
-    onClick: () -> Unit
-) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12f.scaleWidth()),
-        colors = CardDefaults.cardColors(containerColor = StoxCardBg),
-        onClick = onClick
-    ) {
-        Row(
-            modifier = Modifier.padding(16f.scaleWidth()),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(48f.scaleWidth())
-                    .clip(RoundedCornerShape(8f.scaleWidth()))
-                    .background(StoxSearchBg) // Dark Greenish Blue from design
-            )
-            
-            Spacer(modifier = Modifier.width(16f.scaleWidth()))
-            
-            Column(modifier = Modifier.weight(1f)) {
-                Text(code, fontWeight = FontWeight.Bold, fontSize = 16f.scaleFontSize())
-                Text(name, fontSize = 14f.scaleFontSize(), color = StoxTextSecondary, maxLines = 1)
-            }
-            
-            Column(horizontalAlignment = Alignment.End) {
-                 Text(
-                     change, 
-                     color = if (change.contains("+")) StoxGreen else if (change.contains("-")) StoxRed else StoxTextSecondary,
-                     fontWeight = FontWeight.Bold,
-                     fontSize = 14f.scaleFontSize()
-                 )
-                Text("LKR $price", fontWeight = FontWeight.Bold, fontSize = 14f.scaleFontSize())
-            }
-            
-            Spacer(modifier = Modifier.width(16f.scaleWidth()))
-            
-            // Add Button
-             Box(
-                modifier = Modifier
-                    .size(36f.scaleWidth())
-                    .clip(CircleShape)
-                    .background(StoxLightBlue),
-                contentAlignment = Alignment.Center
-            ) {
-                 Icon(Icons.Default.Add, contentDescription = "Add", tint = StoxPrimaryBlue)
-             }
-        }
-    }
-}
 
-@Composable
-fun SuggestionChip(text: String) {
-    Surface(
-        shape = RoundedCornerShape(8f.scaleWidth()),
-        border = androidx.compose.foundation.BorderStroke(1f.scaleWidth(), Color(0xFFE0E0E0)),
-        color = Color.White
-    ) {
-        Text(
-            text = text,
-            modifier = Modifier.padding(horizontal = 16f.scaleWidth(), vertical = 8f.scaleHeight()),
-            fontSize = 14f.scaleFontSize(),
-            color = StoxTextSecondary
-        )
-    }
-}
