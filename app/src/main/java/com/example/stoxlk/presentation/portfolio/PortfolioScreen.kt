@@ -52,7 +52,7 @@ fun PortfolioScreen(onStockClick: (String) -> Unit) {
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(16f.scaleWidth()),
+            contentPadding = PaddingValues(horizontal = 16f.scaleWidth(), vertical = 16f.scaleHeight()),
             verticalArrangement = Arrangement.spacedBy(16f.scaleHeight())
         ) {
             // Your Holdings Header

@@ -26,7 +26,7 @@ import com.example.stoxlk.util.scaleWidth
 fun HomeShimmer() {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16f.scaleWidth()),
+        contentPadding = PaddingValues(start = 16f.scaleWidth(), end = 16f.scaleWidth(), bottom = 16f.scaleHeight()),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         // Header Shimmer

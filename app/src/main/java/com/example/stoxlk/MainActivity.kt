@@ -16,6 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.stoxlk.presentation.home.HomeScreen
 import com.example.stoxlk.presentation.intro.IntroScreen
+import com.example.stoxlk.presentation.login.LoginScreen
 import com.example.stoxlk.presentation.stock.StockProfileScreen
 import com.example.stoxlk.ui.theme.StoxLKTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,10 +47,17 @@ fun AppNavigation() {
         composable("intro") {
             IntroScreen(
                 onLoginClick = {
+                    navController.navigate("login")
+                },
+            )
+        }
+        composable("login") {
+            LoginScreen(
+                onLoginClick = {
                     navController.navigate("home") {
                         popUpTo("intro") { inclusive = true }
                     }
-                },
+                }
             )
         }
         composable("home") {

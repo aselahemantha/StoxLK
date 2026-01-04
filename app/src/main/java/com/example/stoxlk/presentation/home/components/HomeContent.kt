@@ -24,7 +24,7 @@ import com.example.stoxlk.util.scaleWidth
 fun HomeContent(onStockClick: (String) -> Unit) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(bottom = 16f.scaleHeight()),
+        contentPadding = PaddingValues(start = 16f.scaleWidth(), end = 16f.scaleWidth(), bottom = 16f.scaleHeight()),
         verticalArrangement = Arrangement.spacedBy(16f.scaleHeight()),
     ) {
         // Header
